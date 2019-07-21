@@ -10,15 +10,12 @@
 {% block content %}
 <div class="container">
     <br>
-    <form method="POST">
-        {% csrf_token %}
-        <h1 id="title" class="h1 text-body">글 쓰기/수정</h1>
-        <hr>
-        <table>
-            {{form.as_table}}
-        </table>
-        <br>
-        <button type="submit" class="btn btn-outline-dark">제출하기</button>
+    <h1 id="title" class="h1 text-body">New comment</h1>
+    <hr>
+    <form method="POST" class="post-form">
+    {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-outline-dark">댓글달기</button>
     </form>
 </div>
 {% endblock %}

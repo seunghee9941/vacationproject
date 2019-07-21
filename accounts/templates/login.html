@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block button2 %}
+<span class="float-right">
+    <button class="btn btn-outline-secondary" onclick="location.href='{% url 'signup' %}'">회원가입</button>
+</span>
+<span class="float-right">
+    <button class="btn btn-outline-secondary" onclick="location.href='{% url 'welcome' %}'">홈</button>
+</span>
+{% endblock %}
+{% block content %}
+<div class="container">
+<br>
+<h1 id="title" class="h1 text-body">Login</h1>
+<hr>
+<form method="POST" action="{% url 'login' %}">
+{% csrf_token %}
+    Username:
+    <br>
+    <input name="username" type="text" value="">
+    <br>
+    Password:
+    <br>
+    <input name="password" type="password" value="">
+    <br>
+    <br>
+    <input class="btn btn-primary" type="submit" value="Login">
+</form>
+</div>
+{% endblock %}

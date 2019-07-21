@@ -1,51 +1,35 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="utf-8">
-    <title>CRUD</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        function change_theme(){
-            var theme = document.getElementById('blog');
-            if (theme.className == "text-light bg-warning"){
-                theme.className="text-light bg-success";
-            }
-            else{
-                theme.className="text-light bg-warning";
-            }
-        }
-    </script>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block button %}
+<span class="float-right">
+    <button class="btn btn-outline-secondary" onclick="location.href='{% url 'home' %}'">블로그</button>
+</span>
+{% endblock %}
+{% block button2 %}
+<span class="float-right">
+    <button class="btn btn-outline-secondary" onclick="location.href='{% url 'signup' %}'">회원가입</button>
+</span>
+<span class="float-right">
+    <button class="btn btn-outline-secondary" onclick="location.href='{% url 'login' %}'">로그인</button>
+</span>
+{% endblock %}
+{% block content %}
 <div class="container">
-    <br>
-    <span class="h1">HOME</span>
-    <span class="float-right" id="span">
-        <script>
-            var btn = document.createElement('button');
-            var btntext = document.createTextNode('테마변경');
-            btn.appendChild(btntext);
-            btn.className="btn btn-outline-secondary";
-            btn.onclick=change_theme;
-            document.getElementById('span').appendChild(btn);
-        </script>
-    </span>
-    <p><a href="{% url 'home' %}" class="text-light bg-warning" id="blog">블로그 가기</a></p>
-    <div id="map" style="width:100%;height:350px;"></div>
+<br>
+<span class="h1 text-body" id="title">HOME</span>
+<hr>
 
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=35aa55b0c5ad91f5909e253bc825d012"></script>
-    <script>
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-        mapOption = { 
-            center: new kakao.maps.LatLng(37.389788, 126.950724), // 지도의 중심좌표
-            level: 3 // 지도의 확대 레벨
-        };
+<div id="map" style="width:100%;height:350px;"></div>
 
-    // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-    var map = new kakao.maps.Map(mapContainer, mapOption); 
-    </script>
-</body>
-</html>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=35aa55b0c5ad91f5909e253bc825d012"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(37.389788, 126.950724), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+</script>
+</div>
+{% endblock %}

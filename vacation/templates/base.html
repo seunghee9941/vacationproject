@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CRUD</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function change_theme(){
+            var theme = document.getElementById('title');
+            if (theme.className == "h1 text-body"){
+                theme.className="h1 text-secondary"
+            }
+            else if(theme.className == "h1 text-secondary"){
+                theme.className="h1 text-success";
+            }
+            else if(theme.className == "h1 text-success"){
+                theme.className="h1 text-danger";
+            }
+            else if(theme.className == "h1 text-danger"){
+                theme.className="h1 text-warning";
+            }
+            else if(theme.className == "h1 text-warning"){
+                theme.className="h1 text-info";
+            }
+            else if(theme.className == "h1 text-info"){
+                theme.className="h1 text-primary";
+            }
+            else{
+                theme.className="h1 text-body";
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <br>
+    <span class="float-right" id="span">
+        <script>
+            var btn = document.createElement('button');
+            var btntext = document.createTextNode('테마변경');
+            btn.appendChild(btntext);
+            btn.className="btn btn-outline-secondary";
+            btn.onclick=change_theme;
+            document.getElementById('span').appendChild(btn);
+        </script>
+    </span>
+    {% if user.is_authenticated %}
+    <span class="float-right">
+        <form id="logout" method="POST" action="{% url 'logout' %}">
+        <button class="btn btn-outline-secondary" href="javascript:{document.getElementById('logout').submit()}">로그아웃</button>
+            {% csrf_token %} <input type="hidden" />
+        </form>
+    </span>
+    {% block button %}
+    {% endblock %}
+
+    {% else %}
+    {% block button2 %}
+    {% endblock %}
+    {% endif %}
+    
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
